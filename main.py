@@ -1,14 +1,11 @@
 #-*- coding:utf-8 -*-
-import procedure,validity,error
-procedure.copyright()
+import procedure, validity
 count=1
-fChainLt=procedure.initFCL()
 while True:
-	procedure.display(count)
 	count+=1
-	while True:
-		str1,str2,command=procedure.getRawOperation()
-		if validity.check():
-			continue
+	str1,str2,command=procedure.getRawOperation() #--- to get the original operation order :str1\str2[\command]
+	if not validity.judgeValide(str1,str2,command):
+		continue
+	procedure.do(str1,str2,command)
+	if command.quit():
 		break
-	if not 

@@ -27,7 +27,7 @@ def separate_num_and_letter(order):
 				orderAfterSep.append(elem)
 	
 	if numberOrder:
-		orderAfterSep.append(numberOrder)
+		orderAfterSep.insert(0,numberOrder)
 	return orderAfterSep
 
 def hasMoreThan_1_Elem_in(conflictLt,Lt):

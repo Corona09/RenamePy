@@ -27,7 +27,6 @@ class whether_empty:
 		}
 		return 'str1 {},str2 {}'.format(dic.get(self.whether_str1_empty),dic.get(self.whether_str2_empty))
 
-
 class singleCommand:
 	def __init__(self,sinCommand):
 		self.__value=sinCommand
@@ -94,6 +93,7 @@ class Command:
 	@property
 	def valueList(self):
 		return (self.number,self.upLower,self.beginEnd,self.sort,self.Quit,self.cancel,self.Help)
+
 	def is_possible(self):
 		whether_str1_empty_list=[]
 		whether_str2_empty_list=[]
@@ -111,3 +111,4 @@ class Command:
 	def whether_str_empty(self):
 		#--- number,upLower,beginEnd,sort,quit,cancel,help
 		return self.number.whether_empty+self.upLower.whether_empty+self.beginEnd.whether_empty+self.sort.whether_empty+self.Quit.whether_empty+self.cancel.whether_empty+self.Help.whether_empty
+

@@ -39,7 +39,8 @@ def hasMoreThan_1_Elem_in(conflictLt,Lt):
 	return False
 
 def hasMem_in(lt1,lt2):
+	result=[]
 	for elem in lt1:
 		if elem in lt2:
-			return  True
-	return False
+			result.append(elem)
+	return result

@@ -23,4 +23,3 @@ def debug(information):
     if not debugOn:
         return None
     print(information)
-warning(0)

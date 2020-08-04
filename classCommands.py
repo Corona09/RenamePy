@@ -27,6 +27,8 @@ class Command:
 	@property
 	def Help(self):return self.__help
 	
+	def empty(self):
+		return not(self.number or self.reverse or self.upLower or self.beginEnd or self.sort or self.Quit or self.cancel or self.Help)
 	def __str__(self):
 		return self.number+self.reverse+self.upLower+self.beginEnd+self.sort+self.Quit+self.cancel+self.Help
-
+	

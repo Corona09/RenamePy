@@ -25,7 +25,11 @@ def notValid(raw):
 			return 404
 	if processFuncs.hasMoreThan_1_NumSeq_in(order):
 		return 	407
-	
+	if 'h' in order:
+		h_pos=order.find('h')
+		if h_pos!=0:
+			return 412
+
 	#---seperate the number and letters in `order` and del the repeated order
 	#---orderAfterSep is a `list` 
 	#---if orderAfterSep has number order, it must be the first element.
@@ -37,9 +41,8 @@ def notValid(raw):
 			if orderAfterSep=='':
 				return 408 #--error Code : ???
 			else:
-				#return orderAfterSep is the valid combination of 'tTsSqzh'
-				# valid combination:
-				# t/T/s/S/q/z/h/*q/h*
+				#return orderAfterSep is not the valid combination of 'tTsSqzh'
+				#valid combination : t/T/s/S/q/z/h/*q/h*
 				if orderAfterSep[0].isdigit():
 					return 409
 				if processFuncs.hasMoreThan_1_Elem_in(('t','T','s','S'),orderAfterSep):
@@ -48,7 +51,6 @@ def notValid(raw):
 					return 406
 				if 'h' in orderAfterSep and len(orderAfterSep)>2:
 					return 406
-				
 
 		else:
 			#if tTsS in orderAfterSep:

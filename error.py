@@ -15,6 +15,7 @@ def warning(errorCode=None):
 		409:'Nothing to Operate',
 		410:'Command Repeat.',
 		411:'Command Missing.',
+		412:'Command Order Error.',
 		501:'Unknown Error.'
 	}.get(errorCode)
     print('0x{err:0>6x}:{info}'.format(err=errorCode,info=information))

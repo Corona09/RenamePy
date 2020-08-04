@@ -23,7 +23,9 @@ def separate_num_and_letter(order):
 		if elem.isdigit():
 			numberOrder+=elem
 		else:
-			orderAfterSep.append(elem)
+			if elem not in orderAfterSep:#--- del repeated order
+				orderAfterSep.append(elem)
+	
 	if numberOrder:
 		orderAfterSep.append(numberOrder)
 	return orderAfterSep

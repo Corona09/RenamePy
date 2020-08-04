@@ -8,8 +8,9 @@ class whether_empty:
 	def whether_str2_empty(self):return self.__whether_str2_empty
 
 	def __add__(self,that):
-		ansTup=(1,1)
-		if self.whether_str1_empty
+		return whether_empty(
+			(self.whether_str1_empty+that.whether_str1_empty,self.whether_str2_empty,that.whether_str2_empty)
+			)
 class singleCommand:
 	def __init__(self,sinCommand):
 		self.__value=sinCommand

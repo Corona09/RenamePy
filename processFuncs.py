@@ -16,7 +16,7 @@ def hasMoreThan_1_NumSeq_in(order):
 			return True
 	return False
 
-def separate_num_with_letter(order):
+def separate_num_and_letter(order):
 	numberOrder=''
 	orderAfterSep=[]
 	for elem in order:

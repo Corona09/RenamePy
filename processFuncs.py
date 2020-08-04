@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 import error
-def hasMoreThan1NumSeq_in(order):
+def hasMoreThan_1_NumSeq_in(order):
 	number_beg=0
 	number_end=len(order)-1
 	for i in range(len(order)):
@@ -15,3 +15,16 @@ def hasMoreThan1NumSeq_in(order):
 		if not order[k].isdigit():
 			return True
 	return False
+
+def separate_num_with_letter(order):
+	numberOrder=''
+	orderAfterSep=[]
+	for elem in order:
+		if elem.isdigit():
+			numberOrder+=elem
+		else:
+			orderAfterSep.append(elem)
+	if numberOrder:
+		orderAfterSep.append(numberOrder)
+	return orderAfterSep
+

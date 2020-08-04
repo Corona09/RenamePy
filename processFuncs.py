@@ -30,3 +30,10 @@ def separate_num_and_letter(order):
 		orderAfterSep.append(numberOrder)
 	return orderAfterSep
 
+def hasMoreThan_1_Elem_in(conflictLt,Lt):
+	for i in range(len(conflictLt)):
+		if conflictLt[i] in Lt:
+			for j in range(i+1,len(conflictLt)):
+				if conflictLt[j] in Lt:
+					return True
+	return False

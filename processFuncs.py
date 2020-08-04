@@ -38,7 +38,7 @@ def hasMoreThan_1_Elem_in(conflictLt,Lt):
 					return True
 	return False
 
-def hasMen_in(lt1,lt2):
+def hasMem_in(lt1,lt2):
 	for elem in lt1:
 		if elem in lt2:
 			return  True

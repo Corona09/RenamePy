@@ -22,9 +22,7 @@ def display(cnt):
 		for elem in del_lt:
 			flt.remove(elem)
 		for i in range(len(flt)):
-			flt[i]=classFile.File(flt[i],os.getcwd())
-		for i in range(len(flt)):
-			print('* [{num:0>3d}] : "{fname}"'.format(num=i+1	,fname=flt[i].mainName+flt[i].suffix))
+			print('* [{num:0>3d}] : "{fname}"'.format(num=i+1	,fname=flt[i]))
 		print("***************************************")
 		
 def splitRaw(raw):
@@ -34,7 +32,26 @@ def splitRaw(raw):
 	command='' if len(raw)<3 else raw[2]
 	return tuple([str1,str2,command])
 
-def mainProcess(str1,str2,command):
+def getFileList():
+	result=os.listdir(os.getcwd())
+	del_lt=[]
+	for elem in result:
+		if os.path.isdir(elem):
+			del_lt.append(elem)
+	for elem in del_lt:
+		result.remove(elem)
+	for i in range(len(result)):
+		result[i]=classFile.File(result[i],os.getcwd())
+	return result
+def mainProcess(str1,str2,order):
 	renew_working_dir()
+	# --- get the std command.
+	std_order=processFuncs.separate_num_and_letter(order)
+	command=classCommands.makeCommand(std_order)
+	# command:\number \upLower \beginEnd \sort \cancel \Quit \Help
 
-	return
+	# --- Get the file list:
+	flt=getFileList()
+	fl_num=len(flt)
+	
+	

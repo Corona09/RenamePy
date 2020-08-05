@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import error,processFuncs
+import error,processFuncs,classCommands
 validCommand='ruUlLtTsSqzhbe'
 invalidNameChar='\\/:*?"<>|'
 
@@ -44,3 +44,15 @@ def notValid(raw):
 		if processFuncs.hasMoreThan_1_NumSeq_in(order):
 			return 407
 		std_order=processFuncs.separate_num_and_letter(order)
+
+		if hasConflict_in(std_order):
+			return 406
+		
+		command=processFuncs.makeCommand(std_order)
+		a=classCommands.Command()
+		if not commands.is_possible():
+			return 406
+		whe_str_empty=command.whether_str_empty()
+		if (whe_str_empty.whether_str1_empty==1 and str1=='') or (whe_str_empty.whether_str1_empty==-1 and str1):return 413
+		if (whe_str_empty.whether_str2_empty==1 and str2=='') or (whe_str_empty.whether_str2_empty==-1 and str2):return 413
+	return 0

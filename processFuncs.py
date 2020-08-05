@@ -77,7 +77,7 @@ def getElem(subLt,lt):
 
 def makeCommand(std_order):
 	return classCommands.Command(
-		number=std_order[0] if len(std_order)>0 and std_order[0].isdigit() else  '' #'' if not std_order[0].isdigit() else std_order[0],
+		number=std_order[0] if len(std_order)>0 and std_order[0].isdigit() else  '',
 		upLower=getElem('uUlL',std_order),
 		beginEnd=getElem('be',std_order),
 		Sort=getElem('tTsS',std_order),

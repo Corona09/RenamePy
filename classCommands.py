@@ -14,13 +14,6 @@ class whether_empty:
 		return whether_empty(
 			(self.whether_str1_empty | that.whether_str1_empty , self.whether_str2_empty | that.whether_str2_empty)
 		)
-		# a=self.whether_str1_empty+that.whether_str1_empty
-		# if a==2:a=1
-		# if a==-2:a=-1
-		# b=self.whether_str2_empty+that.whether_str2_empty
-		# if b==2:b=1
-		# if b==-2:b=-1
-		# return whether_empty((a,b))
 
 	def __str__(self):
 		dic={

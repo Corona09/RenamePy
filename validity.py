@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*-
 import error,processFuncs,classCommands
 validCommand='uUlLtTsSqzhbe'
-invalidNameChar='\\/:*?"<>|'
+invalidNameChar='\\/:?"<>|' #--- it doesn't contain '*' because str2 can have '*' in some cases
 
 def hasConflict_in(std_order):
 	#--- std_order=[number,'','','',...]
@@ -33,7 +33,7 @@ def notValid(raw):
 	order='' if len(rawAfterSplit)==2 else rawAfterSplit[2]
 
 	if order=='':
-		if processFuncs.hasMem_in(invalidNameChar,str1) or processFuncs.hasMem_in(invalidNameChar,str2):
+		if processFuncs.hasMem_in(invalidNameChar+'*',str1) or processFuncs.hasMem_in(invalidNameChar,str2):
 			return 405
 		else:
 			return 0
@@ -55,4 +55,13 @@ def notValid(raw):
 		whe_str_empty=command.whether_str_empty()
 		if (whe_str_empty.whether_str1_empty==1 and str1=='') or (whe_str_empty.whether_str1_empty==-1 and str1):return 413
 		if (whe_str_empty.whether_str2_empty==1 and str2=='') or (whe_str_empty.whether_str2_empty==-1 and str2):return 413
+		
+		# --- Special Judge:
+		# if 'tTsS' exists, str2 should have special format.
+		if command.sort:
+			if str2 and '*' not in str2:
+				return 414
+			if str2.count('*')>1:
+				return 415
+
 	return 0

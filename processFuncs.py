@@ -55,3 +55,15 @@ def bothHas(lt1,lt2,lt):
 		if elem in lt:
 			has_lt2_mem_in_lt=True
 	return has_lt1_mem_in_lt and has_lt2_mem_in_lt
+
+def hasNum_and_mem_in(Set,lt):
+	hasMem_of_set=False
+	for elem in Set:
+		if elem in lt:
+			hasMem_of_set=True
+	if not hasMem_of_set:return False
+
+	for elem in lt:
+		if elem.isdigit():
+			return True
+	return False

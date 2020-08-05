@@ -43,6 +43,7 @@ def getFileList():
 	for i in range(len(result)):
 		result[i]=classFile.File(result[i],os.getcwd())
 	return result
+
 def mainProcess(str1,str2,order):
 	renew_working_dir()
 	# --- get the std command.

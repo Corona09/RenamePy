@@ -1,8 +1,8 @@
 #-*- coding:utf-8 -*-
 import os,sys,error,classFile,classCommands,processFuncs
 def renew_working_dir():
-	os.chdir(os.path.dirname(__file__)+'\\..')
-	
+	os.chdir(os.path.dirname(__file__)+'\\..\\testDir')
+
 def display(cnt):
 	if not cnt:
 		print("----------------------------------------")
@@ -36,4 +36,5 @@ def splitRaw(raw):
 
 def mainProcess(str1,str2,command):
 	renew_working_dir()
+
 	return

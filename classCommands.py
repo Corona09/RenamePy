@@ -111,6 +111,9 @@ class Command:
 	def whether_quit(self):
 		return self.Quit=='q' and self.Help==''
 
+	def whether_rename(self):
+		return processFuncs.hasMem_in('uUlLtTsSbe',self.valueList)
+
 def makeCommand(std_order):
 	getElem=processFuncs.getElem
 	return Command(

@@ -112,7 +112,7 @@ class Command:
 		return self.Quit=='q' and self.Help==''
 
 	def whether_rename(self):
-		return self.upLower or self.beginEnd or self.cancel or self.sort
+		return self.empty() or self.upLower.value or self.beginEnd.value or self.cancel.value or self.sort.value
 
 def makeCommand(std_order):
 	getElem=processFuncs.getElem

@@ -4,10 +4,21 @@ validCommand='ruUlLtTsSqzhbe'
 invalidNameChar='\\/:*?"<>|'
 
 def hasConflict_in(std_order):
+	#--- std_order=[number,'','','',...]
+	#--- group inner conflict.
 	conflictLt=[('u','U','l','L'),('t','T','s','S'),('e','b')]
 	for elem in conflictLt:
 		if processFuncs.hasMoreThan_1_Elem_in(elem,std_order):
 			return True
+	
+	#--- group conflict.
+	if processFuncs.bothHas('uUlLeb','tTsS',std_order) or processFuncs.bothHas('uUlLebtTsS','z',std_order):
+		return True
+	
+	#--- conflict with Number:
+	if processFuncs.hasNum_and_mem_in('hztTsS',std_order):
+		return True
+	
 	return False
 
 def notValid(raw):

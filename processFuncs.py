@@ -83,49 +83,53 @@ def find_all_start(substr,string):
 	len_sub=len(substr)
 	len_str=len(string)
 	i=0
-	while i < len_str-len_sub:
+	while i <= len_str-len_sub:
 		if string[i:i+len_sub]==substr:
 			result.append(i)
 			i=i+len_sub
+		else:
+			i=i+1
 	return result
 
 def getBegs_and_ends(mainName,str1,command):#--- used in procedure.py
 	if str1 not in mainName:
 		return ([],[])
 	begins=find_all_start(str1,mainName)
+
+	# error.debug('--- in file processFuncs.py function getBegs_and_ends():')
+	# error.debug('   --- ori begins:{}'.format(begins))
 	ends=[]
 	i=0
 	while i < len(begins):
-		ends.appen(begins[i]+len(str1))
+		ends.append(begins[i]+len(str1))
 		i+=1
-	# dlt=[]
-	# for i in range(len(begins)):
-	# 	if begins[i]=='' or begins[i]==None:
-	# 		dlt.append(i)
-	# for elem in dlt:
-	# 	begins.remove(begins[i])
-	# 	ends.remove(ends[i])
 	if command.number:
-		begins=[begins[int(command.number)]]
-		ends=[ends[int(command.number)]]
+		if int(command.number.value)>len(begins):
+			return ([],[])
+		begins=[begins[int(command.number.value)-1]]
+		ends=[ends[int(command.number.value)-1]]
 	if command.beginEnd:
-		if command.beginEnd=='b':
+		# error.debug('---command.beginEnd:{}'.format(command.beginEnd.value))
+		# error.debug('---length of ori main name:{}'.format(len(mainName)))
+		if command.beginEnd.value=='b':
+			# error.debug('   ---command==b')
 			begins[0]=0
-		elif command.beginEnd=='e':
-			ends[0]=len(mainName)-1
+		elif command.beginEnd.value=='e':
+			# error.debug('   ---command==c')
+			ends[0]=len(mainName)
 	if command.sort or command.cancel:
 		begins=[0]
-		ends=[len(mainName)-1]
+		ends=[len(mainName)]
 	return (begins,ends)
 
 def compare_by_command(f1,f2,command):
-	if command.sort=='t':
+	if command.sort.value=='t':
 		return f1.mtime<f2.mtime
-	elif command.sort=='T':
+	elif command.sort.value=='T':
 		return f1.mtime>f2.mtime
-	elif command.sort=='s':
+	elif command.sort.value=='s':
 		return f1.size<f2.size
-	elif command.sort=='S':
+	elif command.sort.value=='S':
 		return f1.size>f2.size
 	else:
 		return True
@@ -137,7 +141,7 @@ def sort_by_command(flt,command):
 	return flt
 
 def real_str2(it,ori_str2,command,max_num):
-	if command.sort=='':
+	if command.sort.value=='':
 		return ori_str2
 	max_len=len(str(max_num))
 	it=str(it)
@@ -145,3 +149,19 @@ def real_str2(it,ori_str2,command,max_num):
 		it='0'+it
 	star_pos=ori_str2.find('*')
 	return ori_str2[0:star_pos]+it+ori_str2[star_pos+1:]
+
+def replace(ori_main_name,str2,begins,ends):
+	name_piece=[]
+#	error.debug("begins:'{}'".format(begins))
+	for i in range(len(begins)+1):
+		if i==0:
+			name_piece.append(ori_main_name[0:begins[0]])
+		if i==len(begins):
+			name_piece.append(ori_main_name[ends[i-1]:])
+		if 0<i<len(begins):
+			name_piece.append(ori_main_name[ends[i-1]:begins[i]])
+	new_main_name=name_piece[0]
+	for i in range(1,len(name_piece)):
+		new_main_name=new_main_name+str2+name_piece[i]
+	return new_main_name
+

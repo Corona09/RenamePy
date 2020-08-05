@@ -39,7 +39,7 @@ def notValid(raw):
 			return 0
 	else:
 		for elem in order:
-			if elem not in validCommand:
+			if not elem.isdigit() and elem not in validCommand:
 				return 404
 		if processFuncs.hasMoreThan_1_NumSeq_in(order):
 			return 407

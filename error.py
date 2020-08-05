@@ -1,5 +1,5 @@
 #-*- coding -*-
-debugOn=True
+debugOn=False
 def warning(errorCode=None):
     errorCode=errorCode if errorCode else 0
     information={

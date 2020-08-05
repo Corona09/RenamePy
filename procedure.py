@@ -55,12 +55,26 @@ def mainProcess(str1,str2,order):
 	flt=getFileList()
 	fl_num=len(flt)
 	
+	# for elem in flt:
+	# 	print('Name:{},Size:{}'.format(elem.fullName,elem.size))
+	# error.debug(command.number.value+command.upLower.value+command.beginEnd.value+command.sort.value+command.cancel.value+command.Help.value+command.Quit.value)
+
 	if not command.whether_rename(): #--- this command will not rename the files
+		# error.debug('not rename')
 		pass
 	else: #--- this command will rename the files.
 		flt=processFuncs.sort_by_command(flt,command)
 		for i in range(len(flt)):
-			begs,ends=processFuncs.getBegs_and_ends(flt[i].mainName,str1,command)
-			real_str2=processFuncs.real_str2(i,str2,command,len(flt))
-			print('real str2:{}'.format(real_str2))
+			begins,ends=processFuncs.getBegs_and_ends(flt[i].mainName,str1,command)
+			# error.debug('begins:"{}",ends:"{}"'.format(begins,ends))
+			if begins:
+				real_str2=processFuncs.real_str2(i,str2,command,len(flt))
+				# error.debug('real str2:{}'.format(real_str2))
+				new_main_name=processFuncs.replace(flt[i].mainName,real_str2,begins,ends)
+				flt[i].rename(new_main_name)
+				os.rename(flt[i].oriFullName,flt[i].fullName)
+	
+	if command.Quit and not command.Help:
+		return True
+	return False
 

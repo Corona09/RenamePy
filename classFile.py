@@ -25,7 +25,7 @@ class File:
 	def mtime(self):return self.__mtime
 
 	def __str__(self):return self.fullName
-	def rename(newMainName):self.__mainName=newMainName
+	def rename(self,newMainName):self.__mainName=newMainName
 
 	def output(self):
 		print('File Name:{}'.format(self.fullName))

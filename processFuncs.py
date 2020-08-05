@@ -1,8 +1,8 @@
 #-*- coding:utf-8 -*-
 import error,classCommands
 def hasMoreThan_1_NumSeq_in(order):
-	number_beg=0
-	number_end=len(order)-1
+	number_beg=-1
+	number_end=-1
 	for i in range(len(order)):
 		if order[i].isdigit():
 			number_beg=i
@@ -11,6 +11,8 @@ def hasMoreThan_1_NumSeq_in(order):
 		if order[j].isdigit():
 			number_end=j
 			break
+	if number_beg<0 or number_end<0:
+		return False
 	for k in range(number_beg,number_end+1):
 		if not order[k].isdigit():
 			return True
@@ -73,15 +75,3 @@ def getElem(subLt,lt):
 		if elem in lt:
 			return elem
 	return None
-
-
-def makeCommand(std_order):
-	return classCommands.Command(
-		number=std_order[0] if len(std_order)>0 and std_order[0].isdigit() else  '',
-		upLower=getElem('uUlL',std_order),
-		beginEnd=getElem('be',std_order),
-		Sort=getElem('tTsS',std_order),
-		Quit=getElem('q',std_order),
-		cancel=getElem('z',std_order),
-		Help=getElem('h',std_order)
-	)

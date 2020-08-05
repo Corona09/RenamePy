@@ -75,3 +75,27 @@ def getElem(subLt,lt):
 		if elem in lt:
 			return elem
 	return None
+
+def find_all_start(substr,string):
+	if not substr:
+		return []
+	result=[]
+	len_sub=len(substr)
+	len_str=len(string)
+	i=0
+	while i < len_str-len_sub:
+		if string[i:i+len_sub]==substr:
+			result.append(i)
+			i=i+len_sub
+	return result
+
+def getBegs_and_ends(mainName,str1,command):#--- used in procedure.py
+	if str1 not in mainName:
+		return ([],[])
+	begins=find_all_start(str1,mainName)
+	ends=[]
+	i=0
+	while i < len(begins):
+		ends.appen(begins[i]+len(str1))
+		i+=1
+	return (begins,ends)

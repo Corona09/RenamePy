@@ -108,3 +108,16 @@ class Command:
 		#--- number,upLower,beginEnd,sort,quit,cancel,help
 		return self.number.whether_empty+self.upLower.whether_empty+self.beginEnd.whether_empty+self.sort.whether_empty+self.Quit.whether_empty+self.cancel.whether_empty+self.Help.whether_empty
 
+
+
+def makeCommand(std_order):
+	getElem=processFuncs.getElem
+	return Command(
+		number=std_order[0] if len(std_order)>0 and std_order[0].isdigit() else  '',
+		upLower=getElem('uUlL',std_order),
+		beginEnd=getElem('be',std_order),
+		Sort=getElem('tTsS',std_order),
+		Quit=getElem('q',std_order),
+		cancel=getElem('z',std_order),
+		Help=getElem('h',std_order)
+	)

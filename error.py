@@ -16,6 +16,7 @@ def warning(errorCode=None):
 		410:'Command Repeat.',
 		411:'Command Missing.',
 		412:'Command Order Error.',
+		413:'File Names don\'t Match the Command.',
 		501:'Unknown Error.'
 	}.get(errorCode)
     print('{err:0>6d}:{info}'.format(err=errorCode,info=information))

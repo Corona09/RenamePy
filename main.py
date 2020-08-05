@@ -1,10 +1,11 @@
 #-*- coding:utf-8 -*-
-import error,procedure, validity
+import error,procedure,validity,classCommands
 count=1
+procedure.display(0)
 while True:
-	count+=1
 	procedure.display(count)
-	raw=input() #--- to get the original operation order :str1\str2[\command]
+	count+=1
+	raw=input('Please input your operation:') #--- to get the original operation order :str1\str2[\command]
 	errCode=validity.notValid(raw)
 	if errCode:
 		error.warning(errCode)

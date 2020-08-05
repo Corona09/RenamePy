@@ -108,7 +108,8 @@ class Command:
 		#--- number,upLower,beginEnd,sort,quit,cancel,help
 		return self.number.whether_empty+self.upLower.whether_empty+self.beginEnd.whether_empty+self.sort.whether_empty+self.Quit.whether_empty+self.cancel.whether_empty+self.Help.whether_empty
 
-
+	def whether_quit(self):
+		return self.Quit=='q' and self.Help==''
 
 def makeCommand(std_order):
 	getElem=processFuncs.getElem

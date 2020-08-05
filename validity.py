@@ -1,6 +1,6 @@
 #-*- coding:utf-8 -*-
 import error,processFuncs,classCommands
-validCommand='ruUlLtTsSqzhbe'
+validCommand='uUlLtTsSqzhbe'
 invalidNameChar='\\/:*?"<>|'
 
 def hasConflict_in(std_order):

@@ -2,6 +2,7 @@
 import os,sys,error,classFile,classCommands,processFuncs
 def renew_working_dir():
 	os.chdir(os.path.dirname(__file__)+'\\..')
+	
 def display(cnt):
 	if not cnt:
 		print("----------------------------------------")
@@ -9,8 +10,10 @@ def display(cnt):
 		print("| Copyright(C)Corona 2020              |")
 		print("----------------------------------------")
 	else:
+		renew_working_dir()
 		print("opertion {}:".format(cnt))
 		print("************The file list:*************")
+		print('* [***] : Current Working Directory:"{}"'.format(os.getcwd().upper()))
 		flt=os.listdir()
 		del_lt=[]
 		for i in range(len(flt)):
@@ -21,7 +24,7 @@ def display(cnt):
 		for i in range(len(flt)):
 			flt[i]=classFile.File(flt[i],os.getcwd())
 		for i in range(len(flt)):
-			print('* [{num:0>3d}] : "{fname}"'.format(num=i,fname=flt[i].mainName+flt[i].suffix))
+			print('* [{num:0>3d}] : "{fname}"'.format(num=i+1	,fname=flt[i].mainName+flt[i].suffix))
 		print("***************************************")
 		
 def splitRaw(raw):
@@ -30,7 +33,7 @@ def splitRaw(raw):
 	str2=raw[1]
 	command='' if len(raw)<3 else raw[2]
 	return tuple([str1,str2,command])
+
 def mainProcess(str1,str2,command):
 	renew_working_dir()
-
 	return

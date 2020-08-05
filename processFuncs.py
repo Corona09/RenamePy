@@ -44,3 +44,14 @@ def hasMem_in(lt1,lt2):
 		if elem in lt2:
 			result.append(elem)
 	return result
+
+def bothHas(lt1,lt2,lt):
+	has_lt1_mem_in_lt=False
+	has_lt2_mem_in_lt=False
+	for elem in lt1:
+		if elem in lt:
+			has_lt1_mem_in_lt=True
+	for elem in lt2:
+		if elem in lt:
+			has_lt2_mem_in_lt=True
+	return has_lt1_mem_in_lt and has_lt2_mem_in_lt

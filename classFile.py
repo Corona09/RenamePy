@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*
-import os
+import os,time
 class File:
 	def __init__(self,oriFullName,oriPath):
 		self.__oriFullName=oriFullName
@@ -8,7 +8,7 @@ class File:
 		self.__suffix=oriFullName[dot_pos:] if dot_pos>0 else ''
 		self.__mainName=self.__oriMainName=oriFullName[:dot_pos] if dot_pos>0 else oriFullName
 		self.__size=os.path.getsize(oriPath+'\\'+oriFullName)
-		self.__mtime=os.path.getmtime(oriPath+'\\'+oriFullName)
+		self.__mtime=time.localtime(os.path.getmtime(oriPath+'\\'+oriFullName))
 	@property
 	def oriFullName(self):return self.__oriFullName
 	@property
@@ -26,3 +26,8 @@ class File:
 
 	def __str__(self):return self.fullName
 	def rename(newMainName):self.__mainName=newMainName
+
+	def output(self):
+		print('File Name:{}'.format(self.fullName))
+		print(' - Size:{}'.format(self.size))
+		print(' - Make Time:{}'.format(self.mtime))

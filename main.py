@@ -10,6 +10,6 @@ while True:
 	if errCode:
 		error.warning(errCode)
 		continue
-	str1,str2,command=procedure.splitRaw(raw)
-	if procedure.mainProcess(str1,str2,command):#---func rturn True when need to do '\q'
+	str1,str2,order=procedure.splitRaw(raw)
+	if procedure.mainProcess(str1,str2,order):#---func rturn True when need to do '\q'
 		break

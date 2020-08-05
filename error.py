@@ -18,7 +18,7 @@ def warning(errorCode=None):
 		412:'Command Order Error.',
 		501:'Unknown Error.'
 	}.get(errorCode)
-    print('0x{err:0>6x}:{info}'.format(err=errorCode,info=information))
+    print('{err:0>6d}:{info}'.format(err=errorCode,info=information))
 def debug(information):
     if not debugOn:
         return None

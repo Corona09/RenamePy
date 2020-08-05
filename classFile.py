@@ -1,7 +1,7 @@
 #-*- coding:utf-8 -*
 import os
 class File:
-	def __init__(oriFullName,oriPath):
+	def __init__(self,oriFullName,oriPath):
 		self.__oriFullName=oriFullName
 		self.__path=oriPath
 		dot_pos=oriFullName.rfind('.')

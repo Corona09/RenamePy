@@ -3,6 +3,7 @@ import error,procedure, validity
 count=1
 while True:
 	count+=1
+	procedure.display(count)
 	raw=input() #--- to get the original operation order :str1\str2[\command]
 	errCode=validity.notValid(raw)
 	if errCode:

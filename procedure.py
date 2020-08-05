@@ -55,4 +55,12 @@ def mainProcess(str1,str2,order):
 	flt=getFileList()
 	fl_num=len(flt)
 	
-	
+	if not command.whether_rename(): #--- this command will not rename the files
+		pass
+	else: #--- this command will rename the files.
+		flt=processFuncs.sort_by_command(flt,command)
+		for i in range(len(flt)):
+			begs,ends=processFuncs.getBegs_and_ends(flt[i].mainName,str1,command)
+			real_str2=processFuncs.real_str2(i,str2,command,len(flt))
+			print('real str2:{}'.format(real_str2))
+

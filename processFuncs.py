@@ -98,4 +98,50 @@ def getBegs_and_ends(mainName,str1,command):#--- used in procedure.py
 	while i < len(begins):
 		ends.appen(begins[i]+len(str1))
 		i+=1
+	# dlt=[]
+	# for i in range(len(begins)):
+	# 	if begins[i]=='' or begins[i]==None:
+	# 		dlt.append(i)
+	# for elem in dlt:
+	# 	begins.remove(begins[i])
+	# 	ends.remove(ends[i])
+	if command.number:
+		begins=[begins[int(command.number)]]
+		ends=[ends[int(command.number)]]
+	if command.beginEnd:
+		if command.beginEnd=='b':
+			begins[0]=0
+		elif command.beginEnd=='e':
+			ends[0]=len(mainName)-1
+	if command.sort or command.cancel:
+		begins=[0]
+		ends=[len(mainName)-1]
 	return (begins,ends)
+
+def compare_by_command(f1,f2,command):
+	if command.sort=='t':
+		return f1.mtime<f2.mtime
+	elif command.sort=='T':
+		return f1.mtime>f2.mtime
+	elif command.sort=='s':
+		return f1.size<f2.size
+	elif command.sort=='S':
+		return f1.size>f2.size
+	else:
+		return True
+def sort_by_command(flt,command):
+	for i in range(len(flt)):
+		for j in range(i+1,len(flt)):
+			if not compare_by_command(flt[i],flt[j],command):
+				flt[i],flt[j]=flt[j],flt[i]
+	return flt
+
+def real_str2(it,ori_str2,command,max_num):
+	if command.sort=='':
+		return ori_str2
+	max_len=len(str(max_num))
+	it=str(it)
+	while len(it)<max_len:
+		it='0'+it
+	star_pos=ori_str2.find('*')
+	return ori_str2[0:star_pos]+it+ori_str2[star_pos+1:]

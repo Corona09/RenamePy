@@ -38,7 +38,7 @@ def display(cnt):
 			print('* Totally {tot} files. To see more, please check the working directory or see file "__cache.dat" in CWD.'.format(tot=len(flt)))
 			cache=open(os.path.dirname(__file__)+'\\__cache.dat','w')
 			for i in range(max_print_line,len(flt)):
-				cache.write('[{num:0>3d}] : "{fname}"\n'.format(num=i,fname=flt[i]))
+				cache.write('[{num:0>3d}] : "{fname}"\n'.format(num=i+1,fname=flt[i]))
 		print("***************************************")
 		
 def splitRaw(raw):

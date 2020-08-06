@@ -1,4 +1,7 @@
-#-*- coding:utf-8 -*
+# -*- coding:utf-8 -*-
+# --- Written by Corona
+# --- Finished on 2020-08-06
+
 import os,time
 class File:
 	def __init__(self,oriFullName,oriPath):

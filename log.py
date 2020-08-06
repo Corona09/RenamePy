@@ -1,4 +1,7 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
+# --- Written by Corona
+# --- Finished on 2020-08-06
+ 
 import error,classFile
 
 class log_list:
@@ -15,13 +18,14 @@ class log_list:
 		return result
 	def append(self,file_name):
 		self.lists.append(file_name)
-	def pop(self):
-		del a[len(a)-1]
-	def back(self):
-		return self.lists[len(self.lists)-1] if self.lists else None
 	@property
 	def length(self):
 		return len(self.lists)
+	def pop(self):
+		del self.lists[self.length-1]
+	def back(self):
+		return self.lists[len(self.lists)-1] if self.lists else None
+
 	
 
 def update(name_list,flt):

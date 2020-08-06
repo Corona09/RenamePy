@@ -1,4 +1,7 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
+# --- Written by Corona
+# --- Finished on 2020-08-06
+
 import error,classCommands
 def hasMoreThan_1_NumSeq_in(order):
 	number_beg=-1
@@ -96,8 +99,6 @@ def getBegs_and_ends(mainName,str1,command):#--- used in procedure.py
 		return ([],[])
 	begins=find_all_start(str1,mainName)
 
-	# error.debug('--- in file processFuncs.py function getBegs_and_ends():')
-	# error.debug('   --- ori begins:{}'.format(begins))
 	ends=[]
 	i=0
 	while i < len(begins):
@@ -109,14 +110,12 @@ def getBegs_and_ends(mainName,str1,command):#--- used in procedure.py
 		begins=[begins[int(command.number.value)-1]]
 		ends=[ends[int(command.number.value)-1]]
 	if command.beginEnd:
-		# error.debug('---command.beginEnd:{}'.format(command.beginEnd.value))
-		# error.debug('---length of ori main name:{}'.format(len(mainName)))
 		if command.beginEnd.value=='b':
-			# error.debug('   ---command==b')
-			begins[0]=0
+			begins=[0]
+			ends=[ends[0]]
 		elif command.beginEnd.value=='e':
-			# error.debug('   ---command==c')
-			ends[0]=len(mainName)
+			begins=[begins[0]]
+			ends=[len(mainName)]
 	if command.sort or command.cancel:
 		begins=[0]
 		ends=[len(mainName)]
@@ -152,7 +151,7 @@ def real_str2(it,ori_str2,command,max_num):
 
 def replace(ori_main_name,str2,begins,ends):
 	name_piece=[]
-#	error.debug("begins:'{}'".format(begins))
+	
 	for i in range(len(begins)+1):
 		if i==0:
 			name_piece.append(ori_main_name[0:begins[0]])

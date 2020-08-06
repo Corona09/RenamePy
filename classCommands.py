@@ -1,4 +1,7 @@
 # -*- coding:utf-8 -*-
+# --- Written by Corona
+# --- Finishen on 2020-08-06
+
 import processFuncs
 class whether_empty:
 	def __init__(self,tup):
@@ -10,7 +13,7 @@ class whether_empty:
 	def whether_str2_empty(self):return self.__whether_str2_empty
 
 	def __add__(self,that):
-		#--- you should judge and avoid case `-1 + 1` happening.
+		# --- you should judge and avoid case `-1 + 1` happening.
 		return whether_empty(
 			(self.whether_str1_empty | that.whether_str1_empty , self.whether_str2_empty | that.whether_str2_empty)
 		)
@@ -27,27 +30,27 @@ class singleCommand:
 	def __init__(self,sinCommand):
 		self.__value=sinCommand
 		self.__whether_str12_empty=whether_empty({
-			#--- -1 : must be empty
-			#--- 0 : empty or not are both allowed
-			#--- 1 : cannot be empty
-			#--- up&lower command
+			# --- -1 : must be empty
+			# ---  0 : empty or not are both allowed
+			# ---  1 : cannot be empty
+			# --- up&lower command
 			'u':(1,0),
 			'l':(1,0),
 			'U':(0,0),
 			'L':(0,0),
-			#--- begin&end command
+			# --- begin&end command
 			'e':(1,0),
 			'b':(1,0),
-			#---sort command
+			# --- sort command
 			't':(-1,0),
 			'T':(-1,0),
 			's':(-1,0),
 			'S':(-1,0),
-			#---function command
+			# --- function command
 			'q':(0,0),
 			'z':(-1,-1),
 			'h':(-1,-1),
-			#---empty command:
+			# --- empty command:
 			'':(0,0)
 		}.get(sinCommand,(1,0)))
 	@property
@@ -106,7 +109,7 @@ class Command:
 		return not(self.number or self.upLower or self.beginEnd or self.sort or self.Quit or self.cancel or self.Help)
 
 	def whether_str_empty(self):
-		#--- number,upLower,beginEnd,sort,quit,cancel,help
+		# --- number,upLower,beginEnd,sort,quit,cancel,help
 		return self.number.whether_empty+self.upLower.whether_empty+self.beginEnd.whether_empty+self.sort.whether_empty+self.Quit.whether_empty+self.cancel.whether_empty+self.Help.whether_empty
 
 	def whether_quit(self):
@@ -145,6 +148,8 @@ class Command:
 			print(r'Help information for command \q')
 		elif self.cancel.value:
 			print(r'Help information for command \z')
+		else:
+			print(r'Help informain for this program.')
 def makeCommand(std_order):
 	getElem=processFuncs.getElem
 	return Command(

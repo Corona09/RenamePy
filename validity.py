@@ -1,29 +1,34 @@
-#-*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
+# --- Written by Corona
+# --- Finished on 2020-08-06
+ 
 import error,processFuncs,classCommands
 validCommand='uUlLtTsSqzhbe'
-invalidNameChar='\\/:?"<>|' #--- it doesn't contain '*' because str2 can have '*' in some cases
+invalidNameChar='\\/:?"<>|' # --- it doesn't contain '*' because str2 can have '*' in some cases
 
 def hasConflict_in(std_order):
-	#--- std_order=[number,'','','',...]
-	#--- group inner conflict.
+	# --- std_order=[number,'','','',...]
+	# --- group inner conflict.
 	conflictLt=[('u','U','l','L'),('t','T','s','S'),('e','b')]
 	for elem in conflictLt:
 		if processFuncs.hasMoreThan_1_Elem_in(elem,std_order):
 			return True
 	
-	#--- group conflict.
+	# --- group conflict.
 	if processFuncs.bothHas('uUlLeb','tTsS',std_order) or processFuncs.bothHas('uUlLebtTsS','z',std_order):
 		return True
 	
-	#--- conflict with Number:
+	# --- conflict with Number:
 	if processFuncs.hasNum_and_mem_in('hztTsS',std_order):
 		return True
 	
 	return False
 
 def notValid(raw):
+	if not raw:
+		return 408
 	rawAfterSplit=raw.split('\\')
-	#---split the s1/s2/order
+	# --- split the s1/s2/order
 	if len(rawAfterSplit)>3:
 		return 401
 	if len(rawAfterSplit)<2:
@@ -57,7 +62,7 @@ def notValid(raw):
 		if (whe_str_empty.whether_str2_empty==1 and str2=='') or (whe_str_empty.whether_str2_empty==-1 and str2):return 413
 		
 		# --- Special Judge:
-		# if 'tTsS' exists, str2 should have special format.
+		# --- if 'tTsS' exists, str2 should have special format.
 		if command.sort:
 			if str2 and '*' not in str2:
 				return 414
@@ -65,6 +70,12 @@ def notValid(raw):
 				return 415
 
 	return 0
+
+def have_empty_names_in(flt):
+	for f in flt:
+		if not f.mainName:
+			return True
+	return False
 
 def conflict_while_rename(flt):
 	ori_name_lt=[]

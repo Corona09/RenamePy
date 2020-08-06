@@ -1,5 +1,7 @@
 #-*- coding:utf-8 -*-
-import os,sys,error,classFile,classCommands,processFuncs
+import os,sys,error,classFile,classCommands,processFuncs,validity
+pre_name={}
+
 def renew_working_dir():
 	os.chdir(os.path.dirname(__file__)+'\\..\\testDir')
 
@@ -77,7 +79,11 @@ def mainProcess(str1,str2,order):
 				# error.debug('real str2:{}'.format(real_str2))
 				new_main_name=processFuncs.replace(flt[i].mainName,real_str2,begins,ends)
 				flt[i].rename(new_main_name)
-				os.rename(flt[i].oriFullName,flt[i].fullName)
+			if not validity.conflict_while_rename(flt):
+				pre_name.clear()
+				for i in range(len(flt)):
+					os.rename(flt[i].oriFullName,flt[i].fullName)
+					
 	
 	if command.Quit and not command.Help:
 		return True

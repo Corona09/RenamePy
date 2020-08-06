@@ -65,3 +65,18 @@ def notValid(raw):
 				return 415
 
 	return 0
+
+def conflict_while_rename(flt):
+	ori_name_lt=[]
+	new_name_lt=[]
+	for elem in flt:
+		ori_name_lt.append(elem.oriFullName)
+		new_name_lt.append(elem.fullName)
+	for elem in new_name_lt:
+		if new_name_lt.count(elem)>1:
+			return 416
+	for i in range(len(new_name_lt)):
+		for j in range(i+1,len(ori_name_lt)):
+			if new_name_lt[i]==ori_name_lt[j]:
+				return 417
+	return 0

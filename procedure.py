@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*-
-import os,sys,error,classFile,classCommands,processFuncs,validity
+import os,sys,error,classFile,classCommands,processFuncs,validity,log
 pre_name={}
 
 def renew_working_dir():
@@ -46,20 +46,14 @@ def getFileList():
 		result[i]=classFile.File(result[i],os.getcwd())
 	return result
 
-def mainProcess(str1,str2,order):
+def mainProcess(str1,str2,order,name_log):
 	renew_working_dir()
 	# --- get the std command.
 	std_order=processFuncs.separate_num_and_letter(order)
 	command=classCommands.makeCommand(std_order)
-	# command:\number \upLower \beginEnd \sort \cancel \Quit \Help
 
 	# --- Get the file list:
 	flt=getFileList()
-	fl_num=len(flt)
-	
-	# for elem in flt:
-	# 	print('Name:{},Size:{}'.format(elem.fullName,elem.size))
-	# error.debug(command.number.value+command.upLower.value+command.beginEnd.value+command.sort.value+command.cancel.value+command.Help.value+command.Quit.value)
 
 	if not command.whether_rename(): #--- this command will not rename the files
 		if command.Help.value:
@@ -79,12 +73,12 @@ def mainProcess(str1,str2,order):
 				# error.debug('real str2:{}'.format(real_str2))
 				new_main_name=processFuncs.replace(flt[i].mainName,real_str2,begins,ends)
 				flt[i].rename(new_main_name)
-			if not validity.conflict_while_rename(flt):
-				pre_name.clear()
-				for i in range(len(flt)):
-					os.rename(flt[i].oriFullName,flt[i].fullName)
-					
-	
+		if not validity.conflict_while_rename(flt):
+			for i in range(len(flt)):
+				os.rename(flt[i].oriFullName,flt[i].fullName)
+			log.update(name_log,flt)
+			for elem in name_log:
+				print(elem)
 	if command.Quit and not command.Help:
 		return True
 	return False

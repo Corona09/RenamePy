@@ -60,8 +60,13 @@ def mainProcess(str1,str2,order):
 	# error.debug(command.number.value+command.upLower.value+command.beginEnd.value+command.sort.value+command.cancel.value+command.Help.value+command.Quit.value)
 
 	if not command.whether_rename(): #--- this command will not rename the files
-		# error.debug('not rename')
-		pass
+		if command.Help.value:
+			command.print_help()
+		else:
+			if command.cancel.value:
+				pass
+			else:
+				pass
 	else: #--- this command will rename the files.
 		flt=processFuncs.sort_by_command(flt,command)
 		for i in range(len(flt)):

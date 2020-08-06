@@ -61,6 +61,7 @@ class singleCommand:
 
 	def __bool__(self):
 		return bool(self.value)
+	
  
 class Command:
 	def __init__(self,number=None,upLower=None,beginEnd=None,Sort=None,Quit=None,cancel=None,Help=None):
@@ -112,9 +113,38 @@ class Command:
 		return self.Quit=='q' and self.Help==''
 
 	def whether_rename(self):
-		if self.empty() or self.upLower.value or self.beginEnd.value or self.cancel.value or self.sort.value or self.number.value:
+		if self.empty() or (not self.Help.value and (self.upLower.value or self.beginEnd.value or self.cancel.value or self.sort.value or self.number.value)):
 			return True
 
+	def print_help(self):
+		if self.number.value:
+			print('help information for command number')
+		elif self.upLower.value:
+			information={
+				'u':r'Help information for command \u',
+				'U':r'Help information for command \U',
+				'l':r'Help information for command \l',
+				'L':r'Help information for command \L'
+			}.get(self.upLower.value)
+			print(information)
+		elif self.beginEnd.value:
+			information={
+				'b':r'Help information for command \b',
+				'e':r'Help information for command \e'
+			}.get(self.beginEnd.value)
+			print(information)
+		elif self.sort.value:
+			information={
+				't':r'Help information for command \t',
+				'T':r'Help information for command \T',
+				's':r'Help information for command \s',
+				'S':r'Help information for command \S'
+			}.get(self.sort.value)
+			print(information)
+		elif self.Quit.value:
+			print(r'Help information for command \q')
+		elif self.cancel.value:
+			print(r'Help information for command \z')
 def makeCommand(std_order):
 	getElem=processFuncs.getElem
 	return Command(

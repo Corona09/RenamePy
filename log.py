@@ -19,6 +19,9 @@ class log_list:
 		del a[len(a)-1]
 	def back(self):
 		return self.lists[len(self.lists)-1] if self.lists else None
+	@property
+	def length(self):
+		return len(self.lists)
 	
 
 def update(name_list,flt):

@@ -1,5 +1,5 @@
 #-*- coding -*-
-debugOn=False
+debugOn=True
 def warning(errorCode=None):
     errorCode=errorCode if errorCode else 0
     information={
@@ -21,6 +21,7 @@ def warning(errorCode=None):
 		415:'Too MUCH "*"!',
 		416:'Conflict exists in new names.',
 		417:'Conflict with original names.',
+		418:'Nothing to Recover.',
 		501:'Unknown Error.'
 	}.get(errorCode)
     print('{err:0>6d}:{info}'.format(err=errorCode,info=information))

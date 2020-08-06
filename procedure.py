@@ -58,27 +58,40 @@ def mainProcess(str1,str2,order,name_log):
 	if not command.whether_rename(): #--- this command will not rename the files
 		if command.Help.value:
 			command.print_help()
-		else:
-			if command.cancel.value:
-				pass
-			else:
-				pass
 	else: #--- this command will rename the files.
-		flt=processFuncs.sort_by_command(flt,command)
-		for i in range(len(flt)):
-			begins,ends=processFuncs.getBegs_and_ends(flt[i].mainName,str1,command)
-			# error.debug('begins:"{}",ends:"{}"'.format(begins,ends))
-			if begins:
-				real_str2=processFuncs.real_str2(i,str2,command,len(flt))
-				# error.debug('real str2:{}'.format(real_str2))
-				new_main_name=processFuncs.replace(flt[i].mainName,real_str2,begins,ends)
-				flt[i].rename(new_main_name)
-		if not validity.conflict_while_rename(flt):
+		if command.cancel.value:
+			if name_log and name_log[0].length>=2:
+				for i in range(len(name_log)):
+					cur_name=name_log[i].back()
+					dot_pos=cur_name.rfind('.')
+					suffix=cur_name[dot_pos:] if dot_pos>0 else ''
+					tmp_name='Begin_bcigiuipgva3cvGHVGHjsbv__{Num:0>6d}__avhav_End'.format(Num=i)+suffix
+					os.rename(cur_name,tmp_name)
+				for i in range(len(name_log)):
+					pre_name=name_log[i].lists[name_log[i].length-2]
+					dot_pos=pre_name.rfind('.')
+					suffix=pre_name[dot_pos:]
+					cur_name='Begin_bcigiuipgva3cvGHVGHjsbv__{Num:0>6d}__avhav_End'.format(Num=i)+suffix
+					os.rename(cur_name,pre_name)
+			else:
+				error.warning(417)
+		else:
+			flt=processFuncs.sort_by_command(flt,command)
 			for i in range(len(flt)):
-				os.rename(flt[i].oriFullName,flt[i].fullName)
-			log.update(name_log,flt)
-			for elem in name_log:
-				print(elem)
+				begins,ends=processFuncs.getBegs_and_ends(flt[i].mainName,str1,command)
+				# error.debug('begins:"{}",ends:"{}"'.format(begins,ends))
+				if begins:
+					real_str2=processFuncs.real_str2(i,str2,command,len(flt))
+					# error.debug('real str2:{}'.format(real_str2))
+					new_main_name=processFuncs.replace(flt[i].mainName,real_str2,begins,ends)
+					flt[i].rename(new_main_name)
+			#---To Check if the new names have conflict with old names during and after the process of raneming
+			if not validity.conflict_while_rename(flt):
+				for i in range(len(flt)):
+					os.rename(flt[i].oriFullName,flt[i].fullName)
+				log.update(name_log,flt)
+				for elem in name_log:
+					print(elem)
 	if command.Quit and not command.Help:
 		return True
 	return False

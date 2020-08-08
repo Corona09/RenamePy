@@ -8,7 +8,11 @@ def get_set():
 	set_text=[]
 	i=0
 	while True:
-		set_text.append(set_file.readline().strip('\n').split('='))
+		tmp=set_file.readline().strip('\n')
+		comment_pos=tmp.find('#')
+		if comment_pos>0:
+			tmp=tmp[:comment_pos]
+		set_text.append(tmp.split('='))
 		if not set_text[i][0]:
 			del set_text[i]
 			break

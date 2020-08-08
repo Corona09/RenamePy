@@ -7,8 +7,10 @@ pre_name={}
 set_text=processFuncs.get_set();
 
 def renew_working_dir():
-	os.chdir(os.getcwd())
-	# os.chdir(os.path.dirname(__file__)+'\\..')
+	if set_text["working_dir"]=="abs":
+		os.chdir(os.getcwd())
+	elif set_text["working_dir"]=="cur":
+		os.chdir(os.path.dirname(__file__)+'\\..')
 
 def display(cnt):
 	if not cnt:

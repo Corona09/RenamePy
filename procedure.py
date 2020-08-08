@@ -4,6 +4,7 @@
  
 import os,sys,error,classFile,classCommands,processFuncs,validity,log
 pre_name={}
+set_text=processFuncs.get_set();
 
 def renew_working_dir():
 	os.chdir(os.path.dirname(__file__)+'\\..')
@@ -20,25 +21,32 @@ def display(cnt):
 		print("************The file list:*************")
 		print('* [***] : Current Working Directory:"{}"'.format(os.getcwd().upper()))
 		flt=os.listdir()
-		del_lt=[]
-		for i in range(len(flt)):
-			if os.path.isdir(flt[i]):
-				del_lt.append(flt[i])
-		
-		set_text=open(os.path.dirname(__file__)+'\\init.set','r')
-		max_print_line=int(set_text.readline().strip('\n').split('=')[1])
-		for elem in del_lt:
-			flt.remove(elem)
+
+		# --- Delete the directory from the list if the value of choice 'ls_dir' is 0.
+		# --- But whether there are 0 or 1, the dirname must be deleted from the list, or error will occur.
+		if not int(set_text["ls_dir"]):
+			del_lt=[]
+			for i in range(len(flt)):
+				if os.path.isdir(flt[i]):
+					del_lt.append(flt[i])
+			for elem in del_lt:
+				flt.remove(elem)
+		if processFuncs.get_in_dir_name() in flt:
+			flt.remove(processFuncs.get_in_dir_name())
+
+		# --- if there are too many lines, only part of them will be printed.
+		# --- the lines printed rely on the choice "max_print_line" in doc "init.set".
+		max_print_line=int(set_text["max_print_line"])
 		for i in range(min(len(flt),max_print_line)):
 			if i+1>max_print_line:
 				break
-			print('* [{num:0>3d}] : "{fname}"'.format(num=i+1,fname=flt[i]))
+			print('* [{num:0>3d}] : "{fname}"{if_dir}'.format(num=i+1,fname=flt[i],if_dir='' if not os.path.isdir(flt[i]) else ' (DIR)'))
 		if len(flt)>max_print_line:
 			print('* ......')
 			print('* Totally {tot} files. To see more, please check the working directory or see file "__cache.dat" in CWD.'.format(tot=len(flt)))
 			cache=open(os.path.dirname(__file__)+'\\__cache.dat','w')
 			for i in range(max_print_line,len(flt)):
-				cache.write('[{num:0>3d}] : "{fname}"\n'.format(num=i+1,fname=flt[i]))
+				cache.write('[{num:0>3d}] : "{fname}"{if_dir}\n'.format(num=i+1,fname=flt[i],if_dir='' if not os.path.isdir(flt[i]) else ' (DIR)'))
 		print("***************************************")
 		
 def splitRaw(raw):
@@ -50,12 +58,20 @@ def splitRaw(raw):
 
 def getFileList():
 	result=os.listdir(os.getcwd())
-	del_lt=[]
-	for elem in result:
-		if os.path.isdir(elem):
-			del_lt.append(elem)
-	for elem in del_lt:
-		result.remove(elem)
+
+	# --- Delete the directory from the list if the value of choice 'ls_dir' is 0.
+	# --- But whether there are 0 or 1, the dirname must be deleted from the list, or error will occur.
+	whether_ls_dir=int(set_text["ls_dir"])
+	if not whether_ls_dir:
+		del_lt=[]
+		for elem in result:
+			if os.path.isdir(elem):
+				del_lt.append(elem)
+		for elem in del_lt:
+			result.remove(elem)
+	if processFuncs.get_in_dir_name() in result:
+		result.remove(processFuncs.get_in_dir_name())
+	
 	for i in range(len(result)):
 		result[i]=classFile.File(result[i],os.getcwd())
 	return result
@@ -85,7 +101,7 @@ def mainProcess(str1,str2,order,name_log):
 				for i in range(len(name_log)):
 					pre_name=name_log[i].lists[name_log[i].length-2]
 					dot_pos=pre_name.rfind('.')
-					suffix=pre_name[dot_pos:]
+					suffix=pre_name[dot_pos:] if dot_pos>0 else ''
 					cur_name='Begin_bcigiuipgva3cvGHVGHjsbv__{Num:0>6d}__avhav_End'.format(Num=i)+suffix
 					os.rename(cur_name,pre_name)
 					name_log[i].pop()

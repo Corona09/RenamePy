@@ -1,8 +1,9 @@
-# -*- coding:utf-8 -*-
+ # -*- coding:utf-8 -*-
 # --- Written by Corona
 # --- Finished on 2020-08-06
  
-import error,procedure,validity,classCommands
+import error,procedure,validity,classCommands,processFuncs
+
 name_log=[]
 count=1
 procedure.display(0)

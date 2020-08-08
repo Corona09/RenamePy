@@ -2,7 +2,27 @@
 # --- Written by Corona
 # --- Finished on 2020-08-06
 
-import error,classCommands
+import error,classCommands,os
+def get_set():
+	set_file=open(os.path.dirname(__file__)+"\\init.set")
+	set_text=[]
+	i=0
+	while True:
+		set_text.append(set_file.readline().strip('\n').split('='))
+		if not set_text[i][0]:
+			del set_text[i]
+			break
+		i+=1
+	result={}
+	for i in range(len(set_text)):
+		result[set_text[i][0]]=set_text[i][1]
+	return result
+
+def get_in_dir_name():
+	abs_dir_name=os.path.dirname(__file__).split('\\')
+	return abs_dir_name[len(abs_dir_name)-1]
+
+
 def hasMoreThan_1_NumSeq_in(order):
 	number_beg=-1
 	number_end=-1

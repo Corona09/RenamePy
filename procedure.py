@@ -10,9 +10,9 @@ def renew_working_dir():
 	VALUE_WHERE_POWERSHELL_RUNS = '0'
 	VALUE_WHERE_PROGRAM_LOCATED = '1'
 	KEY_WORKING_DIR = 'working_dir'
-	if set_text[KEY_WORKING_DIR] == VALUE_WHERE_PROGRAM_LOCATED:
+	if set_text[KEY_WORKING_DIR] == VALUE_WHERE_POWERSHELL_RUNS:
 		os.chdir(os.getcwd())
-	elif set_text[KEY_WORKING_DIR] == VALUE_WHERE_POWERSHELL_RUNS:
+	elif set_text[KEY_WORKING_DIR] == VALUE_WHERE_PROGRAM_LOCATED:
 		os.chdir(os.path.dirname(__file__) + '\\..')
 
 def display(cnt):

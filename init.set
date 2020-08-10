@@ -1,3 +1,3 @@
-max_print_line=15
-ls_dir=0#0/1
-working_dir=abs# abs/cur
+max_print_line = 15
+ls_dir = 0              ; for 0, the program will not list the directories;for 1, the programs will list the directories.
+working_dir = 0       ; for 0 ,the program will run in where the Power Shell runs; for 1, the programs will run in where the program is.

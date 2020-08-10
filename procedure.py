@@ -7,12 +7,17 @@ pre_name={}
 set_text=processFuncs.get_set();
 
 def renew_working_dir():
-	if set_text["working_dir"]=="abs":
+	VALUE_WHERE_POWERSHELL_RUNS = '0'
+	VALUE_WHERE_PROGRAM_LOCATED = '1'
+	KEY_WORKING_DIR = 'working_dir'
+	if set_text[KEY_WORKING_DIR] == VALUE_WHERE_PROGRAM_LOCATED:
 		os.chdir(os.getcwd())
-	elif set_text["working_dir"]=="cur":
-		os.chdir(os.path.dirname(__file__)+'\\..')
+	elif set_text[KEY_WORKING_DIR] == VALUE_WHERE_POWERSHELL_RUNS:
+		os.chdir(os.path.dirname(__file__) + '\\..')
 
 def display(cnt):
+	KEY_LS_DIR = 'ls_dir'
+
 	if not cnt:
 		print("----------------------------------------")
 		print("| This is a program written by Corona. |")
@@ -27,7 +32,7 @@ def display(cnt):
 
 		# --- Delete the directory from the list if the value of choice 'ls_dir' is 0.
 		# --- But whether there are 0 or 1, the dirname must be deleted from the list, or error will occur.
-		if not int(set_text["ls_dir"]):
+		if not int(set_text[KEY_LS_DIR]):
 			del_lt=[]
 			for i in range(len(flt)):
 				if os.path.isdir(flt[i]):

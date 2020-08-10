@@ -2,24 +2,36 @@
 # --- Written by Corona
 # --- Finished on 2020-08-06
 
-import error,classCommands,os
+import error, classCommands, os
 def get_set():
-	set_file=open(os.path.dirname(__file__)+"\\init.set")
-	set_text=[]
-	i=0
+	COMMENT_BEGIN_SYMBOL = ';'
+	set_file = open(os.path.dirname(__file__) + "\\init.set")
+	set_text = []
+	i = 0
 	while True:
-		tmp=set_file.readline().strip('\n')
-		comment_pos=tmp.find('#')
-		if comment_pos>0:
-			tmp=tmp[:comment_pos]
-		set_text.append(tmp.split('='))
+		tmp=set_file.readline().strip('\n') # --- type(tmp) = str
+		if tmp.strip().startswith(COMMENT_BEGIN_SYMBOL):
+			continue
+		comment_pos=tmp.find(COMMENT_BEGIN_SYMBOL)
+		if comment_pos>=0:
+			tmp = tmp[:comment_pos]
+
+		set_text.append(tmp.split('='))  # --- set_text is list which contains several lists.Each contained list is a line of setting.
+		
 		if not set_text[i][0]:
+			#print("break at {}:".format(i));
 			del set_text[i]
 			break
-		i+=1
-	result={}
+		
+		for j in range(len(set_text)):
+			for k in range(len(set_text[j])):
+				set_text[j][k] = set_text[j][k].strip()
+		i += 1
+		
+	result = {}
 	for i in range(len(set_text)):
-		result[set_text[i][0]]=set_text[i][1]
+		print("result[{key}] = {value}".format(key=set_text[i][0], value=set_text[i][1]))
+		result[set_text[i][0]] = set_text[i][1]
 	return result
 
 def get_in_dir_name():
